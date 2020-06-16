@@ -10,7 +10,7 @@ class GameStats:
         self.game_active=False
 
         #High score should never be reset
-        highscore=open("highscore","r")
+        highscore=open("highscore.txt","r")
         self.high_score=int(highscore.read())
 
 
