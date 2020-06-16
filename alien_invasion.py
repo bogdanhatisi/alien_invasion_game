@@ -11,6 +11,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 
+#Alien Invasion version 1.0(Pygame)
 
 class AlienInvasion:
     """Overall class to manage game behavior and assets"""
