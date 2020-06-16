@@ -2,7 +2,7 @@ class Settings:
     """A class to store all settings for Alien Invasion"""
 
     def __init__(self):
-        """Initialize the game's settings"""
+        """Initialize the game's static settings"""
         # Screen settings
         self.screen_width=1200
         self.screen_height=800
@@ -20,9 +20,43 @@ class Settings:
         self.bullets_allowed=3
 
         #Alien settings
-        self.alien_speed=1.0
-        self.fleet_drop_speed=100
+        self.alien_speed=5.0
+        self.fleet_drop_speed=10
         # fleet_direction of 1 represents right;-1 represents left
         self.fleet_direction=1
 
+        #How quickly the game speeds up
+        self.difficulty_value=1
+        self.difficulty_level=0
+        self.initialize_dynamic_settings()
 
+
+    def initialize_dynamic_settings(self):
+        """Initialize settings that can change throughout the game"""
+        self.ship_speed=1.5
+        self.bullet_speed=3.0
+        self.alien_speed=1.0
+
+        #fleet_direction of 1 represents right;-1 represents left
+        self.fleet_direction=1
+
+        #difficulty settings
+        self.speedup_scale = self.difficulty_value
+
+    def increase_speed(self):
+        """Increase speed settings"""
+        self.ship_speed *=self.speedup_scale
+        self.bullet_speed *= self.speedup_scale
+        self.alien_speed *= self.speedup_scale
+
+    def increase_difficulty(self):
+        "Increase difficulty"
+        if self.difficulty_value<=1.5:
+            self.difficulty_value+=0.1
+            self.difficulty_level+=1
+
+    def decrease_difficulty(self):
+        "Decrease difficulty"
+        if self.difficulty_value>1:
+            self.difficulty_value-=0.1
+            self.difficulty_level-=1

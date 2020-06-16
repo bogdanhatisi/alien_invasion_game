@@ -5,7 +5,7 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
-from button import Button
+from button import Button, DifficultyBtn,PlusBtn,MinusBtn
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -40,6 +40,11 @@ class AlienInvasion:
 
         #Make the play button
         self.play_button=Button(self,"Play")
+        #Custom difficulty buttons
+        self.difficulty_button=DifficultyBtn(self,f"Choose difficulty:"
+                                        f"{self.settings.difficulty_level}")
+        self.plus_button=PlusBtn(self,"+")
+        self.minus_button=MinusBtn(self,"-")
 
     def run_game(self):
         """Start the main loop for the game"""
@@ -66,9 +71,13 @@ class AlienInvasion:
                 mouse_pos=pygame.mouse.get_pos()
                 self._check_play_button(mouse_pos)
 
+
     def _start_game(self):
         """Start a new game when the player clicks play"""
         if not self.stats.game_active:
+            # Reset the game settings.
+            self.settings.initialize_dynamic_settings()
+
             # Reset the game statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -86,9 +95,18 @@ class AlienInvasion:
 
     def _check_play_button(self,mouse_pos):
         """Start a new game when the player clicks play"""
+        """Choose difficulty"""
         button_clicked=self.play_button.rect.collidepoint(mouse_pos)
+        plus_clicked=self.plus_button.rect.collidepoint(mouse_pos)
+        minus_clicked=self.minus_button.rect.collidepoint(mouse_pos)
         if button_clicked:
             self._start_game()
+        elif plus_clicked:
+            self.settings.increase_difficulty()
+            print(self.settings.difficulty_value)
+        elif minus_clicked:
+            self.settings.decrease_difficulty()
+            print(self.settings.difficulty_value)
 
     def _check_keydown_events(self,event):
         """Respond to keypress"""
@@ -132,6 +150,7 @@ class AlienInvasion:
             # Destroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _ship_hit(self):
         """Respond to the ship being hit by an alien"""
@@ -238,6 +257,12 @@ class AlienInvasion:
         #Draw the play button if the game is inactive.
         if not self.stats.game_active:
             self.play_button.draw_button()
+            self.difficulty_button.draw_button()
+            self.plus_button.draw_button()
+            self.minus_button.draw_button()
+            #Drawing the difficulty changes
+            self.difficulty_button = DifficultyBtn(self, f"Choose difficulty:"
+                                         f"{self.settings.difficulty_level}")
 
         pygame.display.flip()
 
