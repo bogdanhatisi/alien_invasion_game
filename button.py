@@ -40,7 +40,7 @@ class DifficultyBtn:
 
         # Set the dimensions and properties of the button
         self.width, self.height = 400, 50
-        self.button_color = (0,0,255)
+        self.button_color = (0,0,0)
         self.text_color = (255, 255, 255)
         self.font = pygame.font.SysFont(None, 48)
 
@@ -72,7 +72,7 @@ class PlusBtn:
             # Set the dimensions and properties of the button
             self.width, self.height = 50, 50
             self.button_color = (0, 255, 0)
-            self.text_color = (255, 255, 255)
+            self.text_color = (0, 0, 0)
             self.font = pygame.font.SysFont(None, 48)
 
             # Build the button's rect object and center it.
@@ -104,7 +104,7 @@ class MinusBtn:
             # Set the dimensions and properties of the button
             self.width, self.height = 50, 50
             self.button_color = (255, 0, 0)
-            self.text_color = (255, 255, 255)
+            self.text_color = (0, 0, 0)
             self.font = pygame.font.SysFont(None, 48)
 
             # Build the button's rect object and center it.
