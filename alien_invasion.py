@@ -103,10 +103,8 @@ class AlienInvasion:
             self._start_game()
         elif plus_clicked:
             self.settings.increase_difficulty()
-            print(self.settings.difficulty_value)
         elif minus_clicked:
             self.settings.decrease_difficulty()
-            print(self.settings.difficulty_value)
 
     def _check_keydown_events(self,event):
         """Respond to keypress"""
